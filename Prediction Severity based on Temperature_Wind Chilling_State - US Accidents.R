@@ -58,7 +58,6 @@ imputed_data <- imputed_data %>%
 state_accidents <- imputed_data %>%
   group_by(State) %>%
   summarise(NumAccidents = n())
-
 ggplot(state_accidents, aes(x = State, y = 1, fill = NumAccidents)) +
   geom_tile() +
   labs(title = "Accidents by State (Heatmap)",
@@ -67,24 +66,19 @@ ggplot(state_accidents, aes(x = State, y = 1, fill = NumAccidents)) +
   scale_fill_gradient(low = "white", high = "red") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
 # Severity Distribution (Bar Chart)
 imputed_data$Severity <- factor(imputed_data$Severity)
-
 severity_distribution <- imputed_data %>%
   group_by(Severity) %>%
   summarise(Count = n())
-
 ggplot(severity_distribution, aes(x = Severity, y = Count, fill = Severity)) +
   geom_bar(stat = "identity") +
   labs(title = "Severity Distribution of Accidents",
        x = "Severity",
        y = "Count") +
   scale_fill_discrete(name = "Severity Level")
-
 # Correlation Analysis (Correlation Matrix)
 correlation_matrix <- cor(imputed_data[, c("Temperature.F.", "Wind_Chill.F.")], use = "complete.obs")
-
 corrplot(correlation_matrix, method = "color", type = "upper", addCoef.col = "black")
 
 
@@ -93,30 +87,23 @@ corrplot(correlation_matrix, method = "color", type = "upper", addCoef.col = "bl
 Q1_temp <- quantile(imputed_data$Temperature.F., 0.25)
 Q3_temp <- quantile(imputed_data$Temperature.F., 0.75)
 IQR_temp <- Q3_temp - Q1_temp
-
 # Define lower and upper bounds for Temperature.F. outliers
 lower_bound_temp <- Q1_temp - 1.5 * IQR_temp
 upper_bound_temp <- Q3_temp + 1.5 * IQR_temp
-
 # Identify outliers for Temperature.F.
 temperature_outliers <- imputed_data$Temperature.F. < lower_bound_temp | imputed_data$Temperature.F. > upper_bound_temp
-
 # Calculate the IQR for Wind_Chill.F.
 Q1_windchill <- quantile(imputed_data$Wind_Chill.F., 0.25)
 Q3_windchill <- quantile(imputed_data$Wind_Chill.F., 0.75)
 IQR_windchill <- Q3_windchill - Q1_windchill
-
 # Define lower and upper bounds for Wind_Chill.F. outliers
 lower_bound_windchill <- Q1_windchill - 1.5 * IQR_windchill
 upper_bound_windchill <- Q3_windchill + 1.5 * IQR_windchill
-
 # Identify outliers for Wind_Chill.F.
 windchill_outliers <- imputed_data$Wind_Chill.F. < lower_bound_windchill | imputed_data$Wind_Chill.F. > upper_bound_windchill
-
 # Create a new column to flag outliers
 imputed_data$Temperature_Outlier <- temperature_outliers
 imputed_data$Wind_Chill_Outlier <- windchill_outliers
-
 # Summary of outliers
 outlier_summary <- summarise(imputed_data,
                              Temp_Outliers = sum(Temperature_Outlier),
@@ -126,13 +113,11 @@ ggplot(imputed_data, aes(y = Temperature.F.)) +
   geom_boxplot() +
   labs(title = "Box Plot for Temperature.F.",
        y = "Temperature (Fahrenheit)")
-
 # Box plot for Wind_Chill.F.
 ggplot(imputed_data, aes(y = Wind_Chill.F.)) +
   geom_boxplot() +
   labs(title = "Box Plot for Wind_Chill.F.",
        y = "Wind Chill (Fahrenheit)")
-
 print(outlier_summary)
 
 
@@ -144,6 +129,7 @@ train_data <- imputed_data[train_index, ]
 test_data <- imputed_data[-train_index, ]
 #Define and Train the Model
 model <- glm(Severity ~ Temperature.F. + Wind_Chill.F. + State, data = train_data, family = binomial)
+
 
 # Step 8: Model Evaluation
 # 8.1: Predict on the Test Data
