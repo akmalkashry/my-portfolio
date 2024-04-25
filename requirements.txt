@@ -1,3 +1,4 @@
+README.md for Assessment_2.ipynb
 This model has been testing in Juptyer Notebook by using Keras Model.
 Please include data.csv same folder as model file.
 
