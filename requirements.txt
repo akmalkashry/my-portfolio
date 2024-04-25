@@ -1,0 +1,6 @@
+Keras supports a wide range of neural network architectures, from simple feedforward networks to complex models with multiple inputs, outputs, and branches. This flexibility allows users to design models tailored to their specific needs and problem domains.
+Keras is integrated with TensorFlow, one of the most popular deep learning frameworks. This integration provides the benefits of both Keras's simplicity and TensorFlow's efficiency, allowing users to take advantage of TensorFlow's powerful features while retaining the ease of use of Keras.
+The model consists of three layers:
+  Input layer: The input layer has two neurons, corresponding to the features 'financeAmount' and 'loanTenure'.
+  Hidden layers: Two hidden layers with 64 and 32 neurons respectively, both using the ReLU activation function. ReLU is a commonly used activation function that introduces non-linearity into the model, enabling it to learn complex mappings.
+  Output layer: The output layer has one neuron with a sigmoid activation function, which outputs a probability between 0 and 1 representing the likelihood of loan approval.
