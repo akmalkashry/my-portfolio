@@ -1,3 +1,7 @@
+This model has been testing in Juptyer Notebook by using Keras Model.
+Please include data.csv same folder as model file.
+
+Notes:
 Keras supports a wide range of neural network architectures, from simple feedforward networks to complex models with multiple inputs, outputs, and branches. This flexibility allows users to design models tailored to their specific needs and problem domains.
 It integrated with TensorFlow, one of the most popular deep learning frameworks. This integration provides the benefits of both Keras's simplicity and TensorFlow's efficiency, allowing users to take advantage of TensorFlow's powerful features while retaining the ease of use of Keras.
 The model consists of three layers:
